@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
-import { ApiService } from './api.service';
 import { HelpersService } from './helpers.service';
 import { StatesService } from './states.service';
 @Injectable({
@@ -12,7 +11,6 @@ export class AuthGuardService implements CanActivate {
     private router: Router,
     private states: StatesService,
     private helpers: HelpersService,
-    private api: ApiService
     ) {}
 
     // Verify if token is valid or expired

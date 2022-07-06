@@ -51,7 +51,6 @@ export class LoginPage implements OnInit {
     await this.helpers.loader()
     this.api.post('authentication/token/validate_with_login', dados).subscribe(async (res: any) => {
       await this.helpers.loading.dismiss()
-      console.log(res);
       if(res['success']) {
         await this.states.setTokenData(res)
         await this.router.navigate(['home'])
@@ -61,7 +60,6 @@ export class LoginPage implements OnInit {
       this.helpers.message('login error, try again', 2400, 'danger')
     },
     err => {
-      console.log(err);
       this.helpers.loading.dismiss()
       this.helpers.message('login error, try again', 2400, 'danger')
     })
