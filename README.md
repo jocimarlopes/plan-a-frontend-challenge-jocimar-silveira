@@ -1,6 +1,6 @@
 # Plan A - Frontend Challenge
 
-The challenge are develop an application with Ionic and Angular.
+The challenge is develop an application with Ionic and Angular.
 Pages Number: 2
 
 ## Configuration
