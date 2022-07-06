@@ -18,7 +18,11 @@ export class AuthGuardService implements CanActivate {
     // Verify if token is valid or expired
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
     const now = new Date()
-    const token = await this.states.get_token_data()
+    const token = await this.states.getTokenData()
+    if (!token) {
+      this.router.navigate(['login']);
+      return false;
+    }
     const token_date = new Date(token['expires_at'])
     const expires = (token_date.getTime() / 1000) - (now.getTime() / 1000)
     if (!expires || isNaN(expires) || expires < 1) {

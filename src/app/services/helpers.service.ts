@@ -43,7 +43,7 @@ export class HelpersService {
   /**
    * Alert message pattern
    */
-  async alert_message(title, subtitle, message) {
+  async alertMessage(title, subtitle, message) {
     const alert = await this.alert.create({
       header: title,
       subHeader: subtitle,

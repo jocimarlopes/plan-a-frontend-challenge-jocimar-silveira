@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 import { HelpersService } from 'src/app/services/helpers.service';
 import { StatesService } from 'src/app/services/states.service';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +14,13 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted = false
+  
   constructor(
     private api: ApiService,
     public formBuilder: FormBuilder,
     private helpers: HelpersService,
     private states: StatesService,
     private router: Router,
-    private storage: StorageService
   ) { }
 
   ngOnInit() {
@@ -43,27 +42,31 @@ export class LoginPage implements OnInit {
     if(this.loginForm.status === 'INVALID') {
       return this.helpers.message('invalid credentials, try again', 2400, 'warning')
     }
-    const token_data = await this.api.get_token()
+    const token_data = await this.api.getToken()
     const dados = {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
       request_token: token_data['request_token']
     }
-    this.api.post('authentication/token/validate_with_login', dados).subscribe(res => {
+    await this.helpers.loader()
+    this.api.post('authentication/token/validate_with_login', dados).subscribe(async (res: any) => {
+      await this.helpers.loading.dismiss()
       console.log(res);
       if(res['success']) {
-        this.states.set_token_data(res)
+        await this.states.setTokenData(res)
+        await this.router.navigate(['home'])
         this.helpers.message('login successful', 2400, 'success')
-        this.router.navigate(['home'])
         return
       }
       this.helpers.message('login error, try again', 2400, 'danger')
     },
     err => {
       console.log(err);
+      this.helpers.loading.dismiss()
       this.helpers.message('login error, try again', 2400, 'danger')
     })
     
   }
+
 
 }

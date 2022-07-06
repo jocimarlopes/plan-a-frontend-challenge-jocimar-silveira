@@ -13,14 +13,14 @@ export class StatesService {
     private storage: StorageService
   ) { }
 
-  async set_token_data(data) {
+  async setTokenData(data) {
     await this.storage.init()
     await this.storage.set('token_data', data)
     this.token_data = data
   }
   
   // get token_data from storage
-  async get_token_data() {
+  async getTokenData() {
     await this.storage.init()
     const token = await this.storage.get('token_data')
     return token

@@ -1,27 +1,19 @@
-#container {
-  text-align: center;
-
+.logo {
+  margin-top: 6%;
+  margin-bottom: 6%;
+  width: 45%;
+  max-width: 240px;
+  height: auto;
+}
+.subtitle-container {
+  width: 100%;
+}
+.poster-path {
+  width: 100%;
+}
+.logout{
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  right: 5px;
+  top: 5px;
+  z-index: 50;
 }
