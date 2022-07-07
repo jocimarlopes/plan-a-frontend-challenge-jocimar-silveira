@@ -10,24 +10,13 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class HomePage implements OnInit {
 
-  lastMovie: any = {}
-
   constructor(
-    private api: ApiService,
     private storage: StorageService,
     private router: Router,
 
   ) {}
   
   async ngOnInit() {
-    await this.getLastMovie()
-  }
-
-  async getLastMovie() {
-    this.api.get('movie/latest').subscribe((res: any) => {
-      this.lastMovie = res
-      return
-    })
   }
 
   async logout() {
